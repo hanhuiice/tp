@@ -9,6 +9,7 @@ import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,9 +78,11 @@ public class TrackBeauParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
+        prefixArr.add(0, keywords);
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " name " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new SearchContainsKeywordsPredicate("getName", 0, keywords)), command);
+                FindCommand.COMMAND_WORD + " /n" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new SearchContainsKeywordsPredicate(prefixArr)), command);
     }
 
     @Test

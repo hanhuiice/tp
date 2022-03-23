@@ -10,7 +10,10 @@ import static seedu.trackbeau.testutil.TypicalCustomers.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -118,8 +121,9 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredCustomerList(new SearchContainsKeywordsPredicate("getName",
-                0, Arrays.asList(keywords)));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
+        prefixArr.add(0, Arrays.asList(keywords));
+        modelManager.updateFilteredCustomerList(new SearchContainsKeywordsPredicate(prefixArr));
         assertFalse(modelManager.equals(new ModelManager(trackBeau, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

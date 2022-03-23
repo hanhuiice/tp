@@ -20,6 +20,7 @@ import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
 import seedu.trackbeau.model.ReadOnlyUserPrefs;
 import seedu.trackbeau.model.TrackBeau;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.testutil.CustomerBuilder;
 
@@ -110,6 +111,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addBooking(Booking booking) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addCustomer(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }
@@ -130,12 +136,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteBooking(Booking target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteCustomer(Customer target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setCustomer(Customer target, Customer editedCustomer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Booking> getFilteredBookingList() {
             throw new AssertionError("This method should not be called.");
         }
 

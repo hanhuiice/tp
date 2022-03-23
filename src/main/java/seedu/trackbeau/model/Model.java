@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.trackbeau.commons.core.GuiSettings;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
@@ -58,10 +59,22 @@ public interface Model {
     boolean hasCustomer(Customer customer);
 
     /**
+     * Deletes the given booking.
+     * The booking must exist in trackBeau.
+     */
+    void deleteBooking(Booking target);
+
+    /**
      * Deletes the given customer.
      * The customer must exist in trackBeau.
      */
     void deleteCustomer(Customer target);
+
+    /**
+     * Adds the given booking.
+     * {@code booking} must not already exist in trackBeau.
+     */
+    void addBooking(Booking booking);
 
     /**
      * Adds the given customer.
@@ -75,6 +88,9 @@ public interface Model {
      * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackBeau.
      */
     void setCustomer(Customer target, Customer editedCustomer);
+
+    /** Returns an unmodifiable view of the filtered booking list */
+    ObservableList<Booking> getFilteredBookingList();
 
     /** Returns an unmodifiable view of the filtered customer list */
     ObservableList<Customer> getFilteredCustomerList();

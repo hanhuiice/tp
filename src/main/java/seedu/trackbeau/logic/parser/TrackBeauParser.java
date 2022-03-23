@@ -15,6 +15,10 @@ import seedu.trackbeau.logic.commands.ExitCommand;
 import seedu.trackbeau.logic.commands.FindCommand;
 import seedu.trackbeau.logic.commands.HelpCommand;
 import seedu.trackbeau.logic.commands.ListCommand;
+import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
+import seedu.trackbeau.logic.commands.booking.DeleteBookingCommand;
+import seedu.trackbeau.logic.parser.booking.AddBookingCommandParser;
+import seedu.trackbeau.logic.parser.booking.DeleteBookingCommandParser;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 
 /**
@@ -44,11 +48,17 @@ public class TrackBeauParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        case AddBookingCommand.COMMAND_WORD:
+            return new AddBookingCommandParser().parse(arguments);
+
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case DeleteBookingCommand.COMMAND_WORD:
+            return new DeleteBookingCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

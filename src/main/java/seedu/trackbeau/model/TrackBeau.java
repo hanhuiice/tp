@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.trackbeau.model.booking.Booking;
+import seedu.trackbeau.model.booking.UniqueBookingList;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.UniqueCustomerList;
 
@@ -15,6 +17,7 @@ import seedu.trackbeau.model.customer.UniqueCustomerList;
 public class TrackBeau implements ReadOnlyTrackBeau {
 
     private final UniqueCustomerList customers;
+    private final UniqueBookingList bookings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      */
     {
         customers = new UniqueCustomerList();
+        bookings = new UniqueBookingList();
     }
 
     public TrackBeau() {}
@@ -67,6 +71,14 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     }
 
     /**
+     * Adds a booking to trackBeau.
+     * The customer must not already exist in trackBeau.
+     */
+    public void addBooking(Booking b) {
+        bookings.add(b);
+    }
+
+    /**
      * Adds a customer to trackBeau.
      * The customer must not already exist in trackBeau.
      */
@@ -89,6 +101,14 @@ public class TrackBeau implements ReadOnlyTrackBeau {
      * Removes {@code key} from this {@code TrackBeau}.
      * {@code key} must exist in trackBeau.
      */
+    public void removeBooking(Booking key) {
+        bookings.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code TrackBeau}.
+     * {@code key} must exist in trackBeau.
+     */
     public void removeCustomer(Customer key) {
         customers.remove(key);
     }
@@ -104,6 +124,11 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     @Override
     public ObservableList<Customer> getCustomerList() {
         return customers.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Booking> getBookingList() {
+        return bookings.asUnmodifiableObservableList();
     }
 
     @Override

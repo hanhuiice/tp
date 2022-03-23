@@ -10,8 +10,10 @@ import static seedu.trackbeau.testutil.TypicalCustomers.ELLE;
 import static seedu.trackbeau.testutil.TypicalCustomers.FIONA;
 import static seedu.trackbeau.testutil.TypicalCustomers.getTypicalTrackBeau;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,12 +31,14 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
+        ArrayList<List<String>> firstPrefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
+        ArrayList<List<String>> secondPrefixArr2 = new ArrayList<List<String>>(Collections.nCopies(9, null));
+        firstPrefixArr.add(0, Collections.singletonList("first"));
         SearchContainsKeywordsPredicate firstPredicate =
-                new SearchContainsKeywordsPredicate("getName",
-                        0, Collections.singletonList("first"));
+                new SearchContainsKeywordsPredicate(firstPrefixArr);
+        secondPrefixArr2.add(0, Collections.singletonList("second"));
         SearchContainsKeywordsPredicate secondPredicate =
-                new SearchContainsKeywordsPredicate("getName",
-                        0, Collections.singletonList("second"));
+                new SearchContainsKeywordsPredicate(secondPrefixArr2);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -80,7 +84,8 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private SearchContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new SearchContainsKeywordsPredicate("getName",
-                0, Arrays.asList(userInput.split("\\s+")));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
+        prefixArr.add(0, Arrays.asList(userInput.split("\\s+")));
+        return new SearchContainsKeywordsPredicate(prefixArr);
     }
 }

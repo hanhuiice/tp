@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.trackbeau.commons.core.GuiSettings;
 import seedu.trackbeau.commons.core.LogsCenter;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final TrackBeau trackBeau;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
+    private final FilteredList<Booking> filteredBookings;
 
     /**
      * Initializes a ModelManager with the given trackBeau and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.trackBeau = new TrackBeau(trackBeau);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.trackBeau.getCustomerList());
+        filteredBookings = new FilteredList<>(this.trackBeau.getBookingList());
     }
 
     public ModelManager() {
@@ -94,8 +97,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteBooking(Booking target) {
+        trackBeau.removeBooking(target);
+    }
+
+    @Override
     public void deleteCustomer(Customer target) {
         trackBeau.removeCustomer(target);
+    }
+
+    @Override
+    public void addBooking(Booking booking) {
+        trackBeau.addBooking(booking);
+        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
     @Override
@@ -109,6 +123,17 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedCustomer);
 
         trackBeau.setCustomer(target, editedCustomer);
+    }
+
+    //=========== Filtered Booking List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Booking} backed by the internal list of
+     * {@code versionedTrackBeau}
+     */
+    @Override
+    public ObservableList<Booking> getFilteredBookingList() {
+        return filteredBookings;
     }
 
     //=========== Filtered Customer List Accessors =============================================================

@@ -1,6 +1,7 @@
 package seedu.trackbeau.model;
 
 import javafx.collections.ObservableList;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
@@ -14,4 +15,5 @@ public interface ReadOnlyTrackBeau {
      */
     ObservableList<Customer> getCustomerList();
 
+    ObservableList<Booking> getBookingList();
 }

@@ -2,6 +2,9 @@ package seedu.trackbeau.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -151,5 +154,43 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String targetIndex} into an {@code targetIndex}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code targetIndex} is invalid.
+     */
+    public static Integer parseCustomerID(String targetIndex) throws ParseException {
+        requireNonNull(targetIndex);
+        String trimmedIndex = targetIndex.trim();
+        Integer targetIndexInt;
+        try {
+            targetIndexInt = Integer.parseInt(trimmedIndex);
+        } catch (NumberFormatException e) {
+            throw e;
+        }
+        return targetIndexInt;
+    }
+
+    /**
+     * Parses a {@code String startTime} into an {@code startTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code startTime} is invalid.
+     */
+    public static LocalDateTime parseStartTime(String startTime) throws DateTimeException {
+        requireNonNull(startTime);
+        String trimmedAddress = startTime.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH");
+        LocalDateTime dateTime;
+        try {
+            dateTime = LocalDateTime.parse(trimmedAddress, formatter);
+        } catch (DateTimeException e) {
+            throw e;
+        }
+
+        return dateTime;
     }
 }

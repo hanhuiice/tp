@@ -15,6 +15,7 @@ import static seedu.trackbeau.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.trackbeau.commons.core.index.Index;
@@ -172,8 +173,9 @@ public class CommandTestUtil {
 
         Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
         final String[] splitName = customer.getName().fullName.split("\\s+");
-        model.updateFilteredCustomerList(new SearchContainsKeywordsPredicate("getName",
-                0, Arrays.asList(splitName[0])));
+        ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections.nCopies(9, null));
+        prefixArr.add(0, Arrays.asList(splitName[0]));
+        model.updateFilteredCustomerList(new SearchContainsKeywordsPredicate(prefixArr));
 
         assertEquals(1, model.getFilteredCustomerList().size());
     }
