@@ -18,7 +18,11 @@ public class Booking {
     }
 
     public String getCustomerName() {
-        return customer.getName().toString();
+        return customer.getName().fullName;
+    }
+
+    public String getPhone() {
+        return customer.getPhone().value;
     }
 
     public String getDateTime() {

@@ -68,8 +68,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Booking> getFilteredBookingList() {
-        //todo
-        return (ObservableList<Booking>) new ArrayList<Booking>();
+        return model.getFilteredBookingList();
     }
 
     @Override
