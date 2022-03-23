@@ -2,6 +2,7 @@ package seedu.trackbeau.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import seedu.trackbeau.logic.parser.TrackBeauParser;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.storage.Storage;
 
@@ -62,6 +64,12 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Customer> getFilteredCustomerList() {
         return model.getFilteredCustomerList();
+    }
+
+    @Override
+    public ObservableList<Booking> getFilteredBookingList() {
+        //todo
+        return (ObservableList<Booking>) new ArrayList<Booking>();
     }
 
     @Override

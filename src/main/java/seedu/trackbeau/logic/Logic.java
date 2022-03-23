@@ -8,6 +8,7 @@ import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.ReadOnlyTrackBeau;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
 
 /**
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of customers */
     ObservableList<Customer> getFilteredCustomerList();
+
+    /** Returns an unmodifiable view of the filtered list of bookings */
+    ObservableList<Booking> getFilteredBookingList();
 
     /**
      * Returns the user prefs' trackBeau file path.
